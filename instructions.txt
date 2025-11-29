@@ -1,0 +1,63 @@
+StarWrath setup instructions
+============================
+
+Tech stack: Docker, Node.js, Next.js, MySQL, Phaser, Socket.IO, Bootstrap.
+
+Prerequisites
+-------------
+- Node.js 18+
+- npm 9+
+- Docker + Docker Compose
+- MySQL (local or remote) if you want to test database connectivity
+
+Environment
+-----------
+- Create a .env file at the project root (not committed) with:
+  DATABASE_URL=mysql://user:pass@host:3306/starwrath
+  NEXT_PUBLIC_SOCKET_PATH=/api/socketio
+
+Install & run locally
+---------------------
+1. npm install
+2. npm run dev
+3. Visit http://localhost:3000
+
+Docker build & run
+------------------
+- docker build -t starwrath .
+- docker run -p 3000:3000 --env-file .env starwrath
+
+Socket server
+-------------
+- Socket.IO server is exposed via pages/api/socketio.js. The client uses /api/socketio by default.
+
+MySQL note
+----------
+- lib/db.js exposes getPool() for future persistence work. The current UI uses in-memory sample data.
+
+Asset requirements
+------------------
+Binary assets are not included in the repository. To run the UI with imagery, you must supply the following PNG files in /public/assets/images/:
+- /public/assets/images/terrain/drone.png : a terrain construction drone (~6 tons), industrial look, armed with an energy weapon.
+- /public/assets/images/logo.png : game logo displayed in the header and other UI spots.
+- /public/assets/images/terrain/planet-texture.png : subtle planet texture for map nodes.
+- /public/assets/images/ui/faction-terrains.png : faction badge for Terrains (capital-ship centric).
+- /public/assets/images/ui/faction-pyric.png : faction badge for Pyric (cloak/mines/scanners).
+- /public/assets/images/ui/faction-bytillian.png : faction badge for Bytillian (carrier/fighter doctrine).
+
+Gameplay shape (implemented in UI/prototype)
+--------------------------------------------
+- 1-second ticks, with hours-long warp distances and large scanner ranges.
+- Join/host lobbies with game name, password, max players, start time, and win condition (control X planets).
+- Countdown to match start; auto-transition to tactical map when it hits zero.
+- Factions: Terrains (no cloak, strong capitals/torpedoes), Pyric (cloak/mines/scanners), Bytillian (carriers/fighters, no cloak). Code supports extension.
+- Starting state: random planet assignment, a star base, and three construction drones.
+- Planets: infinite resources; cargo limited by ship weight and capacity.
+- Ships: cargo includes resources, fuel, torpedoes, mines, fighters, etc. Engines, generators, and weapons defined by speed/weight/output/damage/range/delay.
+- Construction drones can build stations; stations must be at least 3 warp minutes from planets.
+- Visibility: sight ranges reduced by cloaking; fog-of-war clearly marked on the Phaser map.
+- Interaction: right-click enemies to attack; right-click damaged/allied targets with builders to start repair/build shuttles.
+
+Testing note
+------------
+- Automated tests are not included. The prototype focuses on layout, lobby experience, and a Phaser-rendered tactical slice.

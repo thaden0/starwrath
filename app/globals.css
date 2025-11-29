@@ -1,0 +1,90 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+:root {
+  --bg-space: radial-gradient(circle at 20% 20%, rgba(48, 107, 255, 0.18), transparent 35%),
+    radial-gradient(circle at 80% 30%, rgba(94, 255, 229, 0.16), transparent 30%),
+    radial-gradient(circle at 50% 80%, rgba(255, 203, 90, 0.12), transparent 40%),
+    #050714;
+  --panel-bg: rgba(255, 255, 255, 0.05);
+  --panel-border: rgba(255, 255, 255, 0.12);
+  --text-muted: #c9d0e3;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--bg-space);
+  color: #f6f8ff;
+  min-height: 100vh;
+}
+
+a {
+  color: #7ad7ff;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #9fe7ff;
+}
+
+.header-glow {
+  box-shadow: 0 2px 12px rgba(0, 200, 255, 0.18);
+}
+
+.panel {
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: 12px;
+  padding: 1rem;
+  backdrop-filter: blur(6px);
+}
+
+.section-title {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  color: #9cc4ff;
+  font-size: 0.85rem;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.space-divider {
+  border-color: rgba(255, 255, 255, 0.05);
+  margin: 2rem 0;
+}
+
+.footer {
+  background: rgba(0, 0, 0, 0.6);
+  color: #dce5ff;
+}
+
+.hero {
+  background: linear-gradient(135deg, rgba(47, 79, 196, 0.3), rgba(7, 18, 53, 0.75));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 2rem;
+}
+
+.fog-overlay {
+  background: radial-gradient(circle at center, rgba(6, 10, 32, 0.7), rgba(6, 10, 32, 0.95));
+}
+
+.phaser-container {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+  background: radial-gradient(circle at 30% 20%, rgba(69, 138, 255, 0.08), transparent 40%),
+    #030915;
+  min-height: 500px;
+}
+
+.badge-faction {
+  border-radius: 10px;
+  padding: 0.35rem 0.75rem;
+  font-weight: 600;
+}
